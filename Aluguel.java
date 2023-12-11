@@ -1,11 +1,11 @@
 import java.util.Date;
 
 public class Aluguel {
-	int codigoLivro;
-	Date dataAluguel;
-	Date dataDevolucao;
-	String nomeLivro;
-	int matriculaCliente;
+	public int codigoLivro;
+	public Date dataAluguel;
+	public Date dataDevolucao;
+	public String nomeLivro;
+	public int matriculaCliente;
 
 	public Aluguel(int codigoLivro, Date dataAluguel, Date dataDevolucao, String nomeLivro, int matriculaCliente) {
 		this.codigoLivro = codigoLivro;
