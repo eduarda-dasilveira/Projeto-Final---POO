@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
-	String nome;
-	int matricula;
-	List<Aluguel> alugueis;
+	public String nome;
+	public int matricula;
+	public List<Aluguel> alugueis;
 
 	public Cliente(String nome, int matricula) {
 		this.nome = nome;
