@@ -98,6 +98,17 @@ public class BibliotecaGUI extends JFrame {
 				listarClientesOrdenados();
 			}
 		});
+
+		JButton removerClienteButton = new JButton("Remover Cliente");
+		removerClienteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				removerCliente();
+			}
+		});
+
+		panel.add(removerClienteButton);
+
 		panel.add(listarClientesOrdenadosButton);
 
 		add(panel, BorderLayout.SOUTH);
@@ -105,6 +116,40 @@ public class BibliotecaGUI extends JFrame {
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+	}
+
+	private void removerCliente() {
+		int matriculaRemover = Integer
+				.parseInt(JOptionPane.showInputDialog("Digite a matrícula do cliente a ser removido:"));
+
+		// Encontrar o cliente pelo número de matrícula
+		Cliente clienteRemover = null;
+		for (Cliente cliente : clientes) {
+			if (cliente.matricula == matriculaRemover) {
+				clienteRemover = cliente;
+				break;
+			}
+		}
+
+		if (clienteRemover != null) {
+			// Remover o cliente da lista
+			clientes.remove(clienteRemover);
+
+			// Remover os aluguéis associados ao cliente
+			List<Aluguel> alugueisRemover = new ArrayList<>();
+			for (Aluguel aluguel : alugueis) {
+				if (aluguel.matriculaCliente == matriculaRemover) {
+					alugueisRemover.add(aluguel);
+				}
+			}
+			alugueis.removeAll(alugueisRemover);
+
+			JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+		}
+
+		atualizarOutput();
 	}
 
 	private void cadastrarLivro() {
@@ -308,21 +353,6 @@ public class BibliotecaGUI extends JFrame {
 			}
 		}
 		JOptionPane.showMessageDialog(null, "Livro não encontrado.");
-	}
-
-	private void appendLivroInfo(StringBuilder sb, Livro livro) {
-		sb.append("Código: ").append(livro.codigo).append(", Nome: ").append(livro.nome).append(", Autor: ")
-				.append(livro.autor).append(", Gênero: ").append(livro.genero).append(", Status: ")
-				.append(livro.disponivel ? "Disponível" : "Indisponível");
-
-		if (!livro.disponivel && livro.clienteAluguel != null && livro.dataAluguel != null
-				&& livro.dataDevolucao != null) {
-			sb.append(", Cliente: ").append(livro.clienteAluguel).append(", Aluguel: ")
-					.append(new SimpleDateFormat("dd/MM/yyyy").format(livro.getDataAluguel())).append(", Devolução: ")
-					.append(new SimpleDateFormat("dd/MM/yyyy").format(livro.getDataDevolucao()));
-		}
-
-		sb.append("\n");
 	}
 
 	private void buscarLivroPorCodigo() {
