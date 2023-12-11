@@ -1,14 +1,14 @@
 import java.util.Date;
 
 public class Livro {
-	String nome;
-	String autor;
-	String genero;
-	int codigo;
-	boolean disponivel;
-	String clienteAluguel; // Nome do cliente que alugou
-	Date dataDevolucao; // Data de devolução
-	Date dataAluguel; // Data de aluguel
+	public String nome;
+	public String autor;
+	public String genero;
+	public int codigo;
+	public boolean disponivel;
+	public String clienteAluguel; // Nome do cliente que alugou
+	public Date dataDevolucao; // Data de devolução
+	public Date dataAluguel; // Data de aluguel
 
 	Livro(String nome, String autor, String genero, int codigo) {
 		this.nome = nome;
